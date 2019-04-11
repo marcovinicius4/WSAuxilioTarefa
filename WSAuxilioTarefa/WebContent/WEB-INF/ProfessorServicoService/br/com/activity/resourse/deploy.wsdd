@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ProfessorServicoService WSDL service -->
+
+  <service name="ProfessorServico" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://resourse.activity.com.br"/>
+      <parameter name="wsdlServiceElement" value="ProfessorServicoService"/>
+      <parameter name="schemaQualified" value="http://resourse.activity.com.br"/>
+      <parameter name="wsdlServicePort" value="ProfessorServico"/>
+      <parameter name="className" value="br.com.activity.resourse.ProfessorServico"/>
+      <parameter name="wsdlPortType" value="ProfessorServico"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://resourse.activity.com.br" xmlns:retNS="http://resourse.activity.com.br" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="createAccount" qname="operNS:createAccount" returnQName="retNS:createAccountReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://resourse.activity.com.br" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:email" type="tns:string"/>
+        <parameter xmlns:pns="http://resourse.activity.com.br" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
+        <parameter xmlns:pns="http://resourse.activity.com.br" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:name" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://resourse.activity.com.br" xmlns:retNS="http://resourse.activity.com.br" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="testRest" qname="operNS:testRest" returnQName="retNS:testRestReturn" returnType="rtns:string" soapAction="">
+      </operation>
+      <parameter name="allowedMethods" value="testRest createAccount"/>
+
+  </service>
+</deployment>
