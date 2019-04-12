@@ -7,42 +7,41 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 
 public class class_Professor {
-	private int idProfessor;
-	private String Name;
-	private String Email;
-	private String Password;
-
+	private int id;
+	private String name;
+	privame String email;
+	private String password;
 	
-	public int getIDProfessor() {
-		return idProfessor;
+	public void setID(int id) {
+		this.id = id;
 	}
 	
-	public void setIDProfessor(int idProfessor) {
-		this.idProfessor = idProfessor;
+	public int getID() {
+		return id;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public String getName() {
-		return Name;
+		return name;
 	}
 	
-	public void setName(String Name) {
-		this.Name = Name;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 	
-	public void setEmail(String Email) {
-		this.Email = Email;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	public String getPassword() {
-		return Password;
-	}
-	
-	public void setPassword(String Password) {
-		this.Password = Password;
+		return password;
 	}
 	
 }
