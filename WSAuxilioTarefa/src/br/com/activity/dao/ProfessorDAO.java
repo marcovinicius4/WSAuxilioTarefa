@@ -64,15 +64,75 @@ public class ProfessorDAO {
 		con.close();
 	}
 	
-	public class_Professor returnProfessor() throws Exception {
+	public class_Professor returnProfessor(String email) throws Exception {
+		class_Professor professorReference = null;
+		
 		try {
 			con = class_DBCon.Conectar();
+			PreparedStatement pstmt = con.prepareStatement("SELECT id, nome, email, senha FROM professor WHERE email = ?");
+			pstmt.setString(1, email);
+			ResultSet rs = pstmt.executeQuery();
 			
+			if (rs.next()) {
+				class_Professor professorReference = new class_Professor();
+				
+				professorReference.setID(rs.getInt(1));
+				professorReference.setName(rs.getString(2));
+				professorReference.setEmail(rs.getString(3));
+				professorReference.setPassword(rs.getString(4));
+			}
 		} catch (Exception e) {
 			System.out.println(e.toString());
 			throw new Exception ("returnProfessor Exception");
 		}
+		con.close();
+		
+		return professorReference;
 	}
+	
+	public void updateProfessor(String oldEmail, String newEmail, String newName, String newPassword) throws Exception {
+		try {
+			con = class_DBCon.Conectar();
+			PreparedStatement pstmt = con.prepareStatement("UPDATE professor SET nome = ?, email = ?, senha = ? WHERE email = ?");
+			pstmt.setString(1, newName);
+			pstmt.setString(2, newEmail);
+			pstmt.setString(3, newPassword);
+			pstmt.setString(4, oldEmail);
+			pstmt.execute();
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			throw new Exception ("updateProfessor Exception");
+		}
+		con.close();
+	}
+	
+	public class_Professor loginProfessor(String email, String password) throws Exception {
+		class_Professor professorReference = null;
+		
+		try {
+			con = class_DBCon.Conectar();
+			PreparedStatement pstmt = con.prepareStatement("SELECT id, nome, email, senha FROM professor WHERE email = ? AND senha = ?");
+			pstmt.setString(1, email);
+			pstmt.setString(2, password);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				class_Professor professorReference = new class_Professor();
+				
+				professorReference.setID(rs.getInt(1));
+				professorReference.setName(rs.getString(2));
+				professorReference.setEmail(rs.getString(3));
+				professorReference.setPassword(rs.getString(4));
+			}
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			throw new Exception ("loginProfessor Exception");
+		}
+		con.close();
+		
+		return professorReference;
+		
+	} 
 	
 	//OLD
 	public static boolean dbCheckEmailExistence(String Email) throws Exception {
